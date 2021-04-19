@@ -49,7 +49,7 @@ public:
 		
 	}
 
-	D3DXMATRIX UpdateCam(float vel, float arriaba, float izqder)
+	D3DXMATRIX UpdateCam(float vel, float vel2, float arriaba, float izqder)
 	{
 		D3DXVECTOR4 tempo;
 		D3DXQUATERNION quatern; //quaternion temporal para la camara
@@ -84,6 +84,7 @@ public:
 
 		//ajustamos la matriz de vista con lo obtenido
 		posCam += refFront * vel/10.0;
+		posCam += refRight * vel2 / -10;
 		hdveo = posCam + refFront;
 		D3DXMatrixLookAtLH(&vista, &posCam, &hdveo, &refUp);
 		D3DXMatrixTranspose( &vista, &vista );

@@ -33,6 +33,7 @@ void createMouseDevice(HWND hWnd) {
 
     m_pMouseDevice->Acquire();
 
+	ShowCursor(false);
 }
 
 void createKeyboardDevice(HWND hWnd) {
@@ -100,6 +101,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     ShowWindow(hWnd, nCmdShow);
 	dxrr = new DXRR(hWnd, 800, 600);
 	dxrr->vel=0;
+	dxrr->vel2 = 0;
     gamePad = new GamePadRR(1);
 
     ClientToScreen(hWnd, &initialPoint);
@@ -176,17 +178,26 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             dxrr->izqder = 0;
             dxrr->arriaba = 0;
             dxrr->vel = 0;
+			dxrr->vel2 = 0;
             char keyboardData[256];
             m_pKeyboardDevice->GetDeviceState(sizeof(keyboardData), (void*)&keyboardData);
 
             if (keyboardData[DIK_S] & 0x80) {
-                dxrr->vel = -5.f;
+                dxrr->vel = -6.f;
             }
 
 
             if (keyboardData[DIK_W] & 0x80) {
-                dxrr->vel = 5.f;
+                dxrr->vel = 6.f;
             }
+
+			if (keyboardData[DIK_A] & 0x80) {
+				 dxrr->vel2 = -6.f;
+			}
+
+			if (keyboardData[DIK_D] & 0x80) {
+				dxrr->vel2 = 6.f;
+			}
 
             if (keyboardData[DIK_B] & 0x80) {
                 dxrr->breakpoint = true;
@@ -197,7 +208,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 PostQuitMessage(0);
                 return 0;
             }
-
+			
             DIMOUSESTATE mouseData;
             m_pMouseDevice->GetDeviceState(sizeof(mouseData), (void*)&mouseData);
 

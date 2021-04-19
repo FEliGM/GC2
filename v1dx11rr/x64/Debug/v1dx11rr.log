@@ -134,26 +134,26 @@ C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\ModeloRR.h(297,1): warning 
 C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\ModeloRR.h(357,1): warning C4305: '+=': truncamiento de 'double' a 'float'
 C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\ModeloRR.h(399,53): warning C4244: 'argumento': conversión de 'double' a 'FLOAT'; posible pérdida de datos
 C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\ModeloRR.h(399,37): warning C4244: 'argumento': conversión de 'double' a 'FLOAT'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(264,1): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(425,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(426,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(427,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(428,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(436,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(437,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(438,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(439,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(448,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(449,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(450,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(451,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(460,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(461,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(462,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(463,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(463,29): warning C4244: C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(146,15): warning C4244: 'return': conversión de 'WPARAM' a 'int'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(212,30): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(216,70): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(221,33): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(294,1): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(465,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(466,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(467,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(468,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(476,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(477,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(478,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(479,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(488,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(489,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(490,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(491,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(500,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(501,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(502,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(503,29): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\DXRR.h(503,29): warning C4244: C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(148,15): warning C4244: 'return': conversión de 'WPARAM' a 'int'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(223,30): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(227,70): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\v1dx11rr\TerrenoSkyBill.cpp(232,33): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
   v1dx11rr.vcxproj -> C:\Users\lauro\Desktop\TerrenoSkyBillModGC2\x64\Debug\TerrenoSkyBill.exe
