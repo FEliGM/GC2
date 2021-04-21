@@ -39,7 +39,9 @@ public:
 	int frameBillboard;
 
 	TerrenoRR *terreno;
+	TerrenoRR* agua;
 	SkyDome *skydome;
+	SkyDome* nubes;
 	BillboardRR *billboard;
 	Camara *camara;
 	ModeloRR* minusOneModel;
@@ -58,7 +60,6 @@ public:
 	ModeloRR* model9;
 	ModeloRR* model10;
 	ModeloRR* model11;
-	
 	
 	float izqder;
 	float arriaba;
@@ -88,35 +89,38 @@ public:
 		IniciaD3D(hWnd);
 		izqder = 0;
 		arriaba = 0;
-		billCargaFuego();
+		/*billCargaFuego();*/
 		camara = new Camara(D3DXVECTOR3(0,80,6), D3DXVECTOR3(0,80,0), D3DXVECTOR3(0,1,0), Ancho, Alto);
-		terreno = new TerrenoRR(300, 300, d3dDevice, d3dContext);
-		skydome = new SkyDome(32, 32, 100.0f, &d3dDevice, &d3dContext, L"SkyDome.png");
-		billboard = new BillboardRR(L"Assets/Billboards/fuego-anim.png",L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);
+		terreno = new TerrenoRR(300, 300, d3dDevice, d3dContext, L"Assets/Texturas/asphalt_02_diff_1k.png", L"alturas.jpg", 1);
+		agua = new TerrenoRR(300, 300, d3dDevice, d3dContext, L"Assets/Texturas/Water_001_COLOR.jpg", L"alturas_agua.jpg", 2);
+		skydome = new SkyDome(32, 32, 200.0f, &d3dDevice, &d3dContext, L"SkyDome.png", L"SkyDome_Night.jpg");
+		nubes = new SkyDome(32, 32, 180.0f, &d3dDevice, &d3dContext, L"cloud001.png", L"cloud001.png");
+		/*billboard = new BillboardRR(L"Assets/Billboards/fuego-anim.png",L"Assets/Billboards/fuego-anim-normal.png", d3dDevice, d3dContext, 5);*/
 
-		vehiculo = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Parte_Vehiculo.obj", L"Assets/Texturas/truck_color-red.jpg", L"Assets/Texturas/Test_Spec.png", 0, 20);
+		vehiculo = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Parte_Vehiculo.obj", L"Assets/Texturas/truck_color-red.jpg", L"Assets/Texturas/Test_Spec.png", -50, 50);
 
-		minusOneModel = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Cosa_Metalica.obj", L"Assets/Texturas/Cosa_Metalica.png", L"Assets/Texturas/Test_Spec.png", 20, 30);
+		minusOneModel = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Cosa_Metalica.obj", L"Assets/Texturas/Cosa_Metalica.png", L"Assets/Texturas/Test_Spec.png", 30, 30);
 
-		basurero = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Basurero.obj", L"Assets/Texturas/T_Slums_Trashcan_D.png", L"Assets/Texturas/Test_Spec.png", 0, 0);
+		basurero = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Basurero.obj", L"Assets/Texturas/T_Slums_Trashcan_D.png", L"Assets/Texturas/Test_Spec.png", -60, -20);
 
 		arma = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Arma.obj", L"Assets/Texturas/Gun_Material_Albedo.png", L"Assets/Texturas/Gun_Material_Specular.png", 10, 0);
 		cartucho = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Cartucho.obj", L"Assets/Texturas/Cannister_Material_Albedo.png", L"Assets/Texturas/Cannister_Material_Specular.png", 10, 0);
 
-		model = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio1/Edificio1_paredesBlancas.obj", L"Assets/Texturas/Edificio1/T_Slums_Wall_D.png", L"Assets/Texturas/Test_Spec.png", -20, -20);
-		model2 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio1/Edificio1_paredesHojalata.obj", L"Assets/Texturas/Edificio1/T_Slums_TinRoof_D.png", L"Assets/Texturas/Test_Spec.png", -20, -20);
-		model3 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio1/Edificio1_ventanas.obj", L"Assets/Texturas/Edificio1/T_Slums_Window_D.png", L"Assets/Texturas/Test_Spec.png", -20, -20);
-		
+		model = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio1/Edificio1_paredesBlancas.obj", L"Assets/Texturas/Edificio1/T_Slums_Wall_D.png", L"Assets/Texturas/Test_Spec.png", -100, 0);
+		model2 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio1/Edificio1_paredesHojalata.obj", L"Assets/Texturas/Edificio1/T_Slums_TinRoof_D.png", L"Assets/Texturas/Test_Spec.png", -100, 0);
+		model3 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio1/Edificio1_ventanas.obj", L"Assets/Texturas/Edificio1/T_Slums_Window_D.png", L"Assets/Texturas/Test_Spec.png", -100, 0);
+
 		model4 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio2/Edificio2_paredesBlancas.obj", L"Assets/Texturas/Edificio1/T_Slums_Wall_D.png", L"Assets/Texturas/Test_Spec.png", 50, 50);
 		model5 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio2/Edificio2_Hojalata.obj", L"Assets/Texturas/Edificio1/T_Slums_TinRoof_D.png", L"Assets/Texturas/Test_Spec.png", 50, 50);
 		model6 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio2/Edificio2_Ventanas.obj", L"Assets/Texturas/Edificio1/T_Slums_Window_D.png", L"Assets/Texturas/Test_Spec.png", 50, 50);
-		
-		model7 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio3/Edificio3_paredesBlancas.obj", L"Assets/Texturas/Edificio1/T_Slums_Wall_D.png", L"Assets/Texturas/Test_Spec.png", 100, 10);
-		model8 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio3/Edificio3_Hojalata.obj", L"Assets/Texturas/Edificio1/T_Slums_TinRoof_D.png", L"Assets/Texturas/Test_Spec.png", 100, 10);
-		model9 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio3/Edificio3_Ventanas.obj", L"Assets/Texturas/Edificio1/T_Slums_Window_D.png", L"Assets/Texturas/Test_Spec.png", 100, 10);
-		
+
+		model7 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio3/Edificio3_paredesBlancas.obj", L"Assets/Texturas/Edificio1/T_Slums_Wall_D.png", L"Assets/Texturas/Test_Spec.png", 0, -90);
+		model8 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio3/Edificio3_Hojalata.obj", L"Assets/Texturas/Edificio1/T_Slums_TinRoof_D.png", L"Assets/Texturas/Test_Spec.png", 0, -90);
+		model9 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio3/Edificio3_Ventanas.obj", L"Assets/Texturas/Edificio1/T_Slums_Window_D.png", L"Assets/Texturas/Test_Spec.png", 0, -90);
+
 		model10 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio4/Edificio4_Hojalata.obj", L"Assets/Texturas/Edificio1/T_Slums_TinRoof_D.png", L"Assets/Texturas/Test_Spec.png", 10, 100);
 		model11 = new ModeloRR(d3dDevice, d3dContext, "Assets/Modelos/Edificio4/Edificio4_Ventanas.obj", L"Assets/Texturas/Edificio1/T_Slums_Window_D.png", L"Assets/Texturas/Test_Spec.png", 10, 100);
+		
 
 		//Assets/Cofre/Cofre.obj
 		
@@ -291,7 +295,7 @@ public:
 		float sphere[3] = { 0,0,0 };
 		float prevPos[3] = { camara->posCam.x, camara->posCam.z, camara->posCam.z };
 		static float angle = 0.0f;
-		angle += 0.005;
+		angle += 0.001;
 		if (angle >= 360) angle = 0.0f;
 		bool collide = false;
 		if( d3dContext == 0 )
@@ -301,36 +305,47 @@ public:
 		d3dContext->ClearRenderTargetView( backBufferTarget, clearColor );
 		d3dContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0 );
 		camara->posCam.y = terreno->Superficie(camara->posCam.x, camara->posCam.z) + 5 ;
-		camara->UpdateCam(vel, vel2,arriaba, izqder);
+		camara->UpdateCam(vel, vel2, arriaba, izqder);
 		skydome->Update(camara->vista, camara->proyeccion);
+		nubes->Update(camara->vista, camara->proyeccion);
 
 		float camPosXZ[2] = { camara->posCam.x, camara->posCam.z };
 
+		
 		TurnOffDepth();
-		skydome->Render(camara->posCam);
+		TurnOffAlphaBlending();
+		skydome->Render(camara->posCam, 0);
+		TurnOnAlphaBlending();
+		nubes->Render(camara->posCam, angle);
 		TurnOnDepth();
+		TurnOffAlphaBlending();
 		terreno->Draw(camara->vista, camara->proyeccion);
+		TurnOnAlphaBlending();
+		agua->Draw(camara->vista, camara->proyeccion);
 		//TurnOnAlphaBlending();
-		billboard->Draw(camara->vista, camara->proyeccion, camara->posCam,
-			-11, -78, terreno->Superficie(-11, -78), 5, uv1, uv2, uv3, uv4, frameBillboard);
+		/*billboard->Draw(camara->vista, camara->proyeccion, camara->posCam,
+			-11, -78, 4, 5, uv1, uv2, uv3, uv4, frameBillboard);*/
 
 		//TurnOffAlphaBlending();
-		minusOneModel->Draw(camara->vista, camara->proyeccion, terreno->Superficie(20, 30), camara->posCam, 10.0f, 0, 'A', 4);
-		vehiculo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 20), camara->posCam, 10.0f, 0, 'A', 3);
-		basurero->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, 0), camara->posCam, 10.0f, 0, 'A', 1);
+		TurnOffAlphaBlending();
+		minusOneModel->Draw(camara->vista, camara->proyeccion, terreno->Superficie(30, 30), camara->posCam, 10.0f, 0, 'A', 4);
+		vehiculo->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-50, 50), camara->posCam, 10.0f, 0, 'A', 3);
+		basurero->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-60, -20), camara->posCam, 10.0f, 0, 'A', 1);
 		arma->Draw(camara->vista, camara->proyeccion, terreno->Superficie(10, 0), camara->posCam, 10.0f, 0, 'A', 1);
 		cartucho->Draw(camara->vista, camara->proyeccion, terreno->Superficie(10, 0), camara->posCam, 10.0f, 0, 'A', 1);
-		model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-20, -20), camara->posCam, 10.0f, 0, 'A', 6);
-		model2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-20, -20), camara->posCam, 10.0f, 0, 'A', 6);
-		model3->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-20, -20), camara->posCam, 10.0f, 0, 'A', 6);
-		model4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(50, 50)-1, camara->posCam, 10.0f, 0, 'A', 6);
-		model5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(50, 50)-1, camara->posCam, 10.0f, 0, 'A', 6);
-		model6->Draw(camara->vista, camara->proyeccion, terreno->Superficie(50, 50)-1, camara->posCam, 10.0f, 0, 'A', 6);
-		model7->Draw(camara->vista, camara->proyeccion, terreno->Superficie(100, 10), camara->posCam, 10.0f, 0, 'A', 6);
-		model8->Draw(camara->vista, camara->proyeccion, terreno->Superficie(100, 10), camara->posCam, 10.0f, 0, 'A', 6);
-		model9->Draw(camara->vista, camara->proyeccion, terreno->Superficie(100, 10), camara->posCam, 10.0f, 0, 'A', 6);
+		model->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-100, 0), camara->posCam, 10.0f, 0, 'A', 6);
+		model2->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-100, 0), camara->posCam, 10.0f, 0, 'A', 6);
+		model3->Draw(camara->vista, camara->proyeccion, terreno->Superficie(-100, 0), camara->posCam, 10.0f, 0, 'A', 6);
+		model4->Draw(camara->vista, camara->proyeccion, terreno->Superficie(50, 50) - 1, camara->posCam, 10.0f, 0, 'A', 6);
+		model5->Draw(camara->vista, camara->proyeccion, terreno->Superficie(50, 50) - 1, camara->posCam, 10.0f, 0, 'A', 6);
+		model6->Draw(camara->vista, camara->proyeccion, terreno->Superficie(50, 50) - 1, camara->posCam, 10.0f, 0, 'A', 6);
+		model7->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, -90), camara->posCam, 10.0f, 0, 'A', 6);
+		model8->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, -90), camara->posCam, 10.0f, 0, 'A', 6);
+		model9->Draw(camara->vista, camara->proyeccion, terreno->Superficie(0, -90), camara->posCam, 10.0f, 0, 'A', 6);
 		model10->Draw(camara->vista, camara->proyeccion, terreno->Superficie(10, 100), camara->posCam, 10.0f, 0, 'A', 6);
 		model11->Draw(camara->vista, camara->proyeccion, terreno->Superficie(10, 100), camara->posCam, 10.0f, 0, 'A', 6);
+		
+		TurnOnAlphaBlending();
 		swapChain->Present( 1, 0 );
 	}
 
@@ -359,7 +374,7 @@ public:
 		ZeroMemory(&descABSD, sizeof(D3D11_BLEND_DESC));
 		descABSD.RenderTarget[0].BlendEnable = TRUE;
 		descABSD.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
-		descABSD.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		descABSD.RenderTarget[0].DestBlend = D3D11_BLEND_SRC_ALPHA;
 		descABSD.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 		descABSD.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 		descABSD.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;

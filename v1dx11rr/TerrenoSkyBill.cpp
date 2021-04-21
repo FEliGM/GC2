@@ -11,7 +11,7 @@
 #pragma comment (lib, "d3dx11.lib")
 #pragma comment (lib, "d3dx10.lib")
 
-#define SCREEN_X 1600
+#define SCREEN_X 1400
 #define SCREEN_Y 900
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -33,7 +33,6 @@ void createMouseDevice(HWND hWnd) {
 
     m_pMouseDevice->Acquire();
 
-	ShowCursor(false);
 }
 
 void createKeyboardDevice(HWND hWnd) {
@@ -100,8 +99,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
     ShowWindow(hWnd, nCmdShow);
 	dxrr = new DXRR(hWnd, 800, 600);
-	dxrr->vel=0;
-	dxrr->vel2 = 0;
+    dxrr->vel = 0;
+    dxrr->vel2 = 0;
     gamePad = new GamePadRR(1);
 
     ClientToScreen(hWnd, &initialPoint);
@@ -178,37 +177,38 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             dxrr->izqder = 0;
             dxrr->arriaba = 0;
             dxrr->vel = 0;
-			dxrr->vel2 = 0;
+            dxrr->vel2 = 0;
             char keyboardData[256];
             m_pKeyboardDevice->GetDeviceState(sizeof(keyboardData), (void*)&keyboardData);
 
             if (keyboardData[DIK_S] & 0x80) {
-                dxrr->vel = -6.f;
+                dxrr->vel = -5.f;
             }
 
 
             if (keyboardData[DIK_W] & 0x80) {
-                dxrr->vel = 6.f;
+                dxrr->vel = 5.f;
             }
 
-			if (keyboardData[DIK_A] & 0x80) {
-				 dxrr->vel2 = -6.f;
-			}
+            if (keyboardData[DIK_A] & 0x80) {
+                dxrr->vel2 = -6.f;
+            }
 
-			if (keyboardData[DIK_D] & 0x80) {
-				dxrr->vel2 = 6.f;
-			}
+            if (keyboardData[DIK_D] & 0x80) {
+                dxrr->vel2 = 6.f;
+            }
 
             if (keyboardData[DIK_B] & 0x80) {
                 dxrr->breakpoint = true;
             }
+
 
             if (keyboardData[DIK_ESCAPE] & 0x80) {
                 KillTimer(hWnd, 100);
                 PostQuitMessage(0);
                 return 0;
             }
-			
+
             DIMOUSESTATE mouseData;
             m_pMouseDevice->GetDeviceState(sizeof(mouseData), (void*)&mouseData);
 
@@ -232,9 +232,9 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 float velocidad = (float)gamePad->GetState().Gamepad.sThumbLY / 32767.0;
                 if (velocidad > 0.19 || velocidad < -0.19) {
                     if (gamePad->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)
-                        velocidad *= 14.5;
+                        velocidad *= 8.5;
                     else if (gamePad->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) velocidad /= 3;
-                    else velocidad *= 2.5;
+                    else velocidad *= 8.5;
                     if (velocidad > 0.19) dxrr->vel = velocidad;
                     else if (velocidad < -0.19) dxrr->vel = velocidad;
                 }

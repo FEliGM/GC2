@@ -36,6 +36,9 @@ private:
 	ID3D11ShaderResourceView* textura;
 	ID3D11SamplerState* texSampler;
 
+	ID3D11ShaderResourceView* textura2;
+	ID3D11SamplerState* texSampler2;
+
 	ID3D11Buffer* matrixBufferCB;
 	MatrixType* matrices;
 
@@ -48,7 +51,7 @@ private:
 
 public:
 	SkyDome(int slices, int stacks, float radio, ID3D11Device** d3dDevice,
-		ID3D11DeviceContext** d3dContext, WCHAR* diffuseTex)
+		ID3D11DeviceContext** d3dContext, WCHAR* diffuseTex, WCHAR* diffuseTex2)
 	{
 		this->slices = slices;
 		this->stacks = stacks;
@@ -57,7 +60,8 @@ public:
 		vertices = NULL;
 		this->d3dDevice = d3dDevice;
 		this->d3dContext = d3dContext;
-		LoadContent(diffuseTex);
+		LoadContent(diffuseTex, diffuseTex2);
+		/*LoadContent(diffuseTex2);*/
 	}
 
 	~SkyDome()
@@ -91,7 +95,7 @@ public:
 		return true;
 	}
 
-	bool LoadContent(WCHAR* diffuseTex)
+	bool LoadContent(WCHAR* diffuseTex, WCHAR* diffuseTex2)
 	{
 		HRESULT d3dResult;
 
@@ -221,6 +225,30 @@ public:
 			return false;
 		}
 
+		d3dResult = D3DX11CreateShaderResourceViewFromFile((*d3dDevice), diffuseTex2, 0, 0, &textura2, 0);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		}
+
+		D3D11_SAMPLER_DESC colorMapDesc2;
+		ZeroMemory(&colorMapDesc2, sizeof(colorMapDesc2));
+		colorMapDesc2.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		colorMapDesc2.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		colorMapDesc2.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+		colorMapDesc2.ComparisonFunc = D3D11_COMPARISON_NEVER;
+		colorMapDesc2.Filter = D3D11_FILTER_ANISOTROPIC;
+		colorMapDesc2.MaxAnisotropy = 8;
+		colorMapDesc2.MaxLOD = D3D11_FLOAT32_MAX;
+
+		d3dResult = (*d3dDevice)->CreateSamplerState(&colorMapDesc2, &texSampler2);
+
+		if (FAILED(d3dResult))
+		{
+			return false;
+		}
+
 
 		D3D11_BUFFER_DESC constDesc;
 		ZeroMemory(&constDesc, sizeof(constDesc));
@@ -245,6 +273,10 @@ public:
 			texSampler->Release();
 		if (textura)
 			textura->Release();
+		if (texSampler2)
+			texSampler->Release();
+		if (textura2)
+			textura->Release();
 		if (solidColorVS)
 			solidColorVS->Release();
 		if (solidColorPS)
@@ -260,6 +292,8 @@ public:
 
 		texSampler = 0;
 		textura = 0;
+		texSampler2 = 0;
+		textura2 = 0;
 		solidColorVS = 0;
 		solidColorPS = 0;
 		inputLayout = 0;
@@ -276,7 +310,7 @@ public:
 		matrices->projMatrix = projection;
 	}
 
-	void Render(D3DXVECTOR3 trans)
+	void Render(D3DXVECTOR3 trans, float angle)
 	{
 		if (d3dContext == 0)
 			return;
@@ -289,13 +323,28 @@ public:
 		(*d3dContext)->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 		(*d3dContext)->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		(*d3dContext)->VSSetShader(solidColorVS, 0, 0);
-		(*d3dContext)->PSSetShader(solidColorPS, 0, 0);
-		(*d3dContext)->PSSetShaderResources(0, 1, &textura);
-		(*d3dContext)->PSSetSamplers(0, 1, &texSampler);
+		static float gira = 0;
+		gira += .001;
+		float cambio;
+		cambio = 2 * sin(gira) - 1;
+		if (cambio<0){
+			
+			(*d3dContext)->VSSetShader(solidColorVS, 0, 0);
+			(*d3dContext)->PSSetShader(solidColorPS, 0, 0);
+			(*d3dContext)->PSSetShaderResources(0, 1, &textura);
+			(*d3dContext)->PSSetSamplers(0, 1, &texSampler);
+		}
+		else {
+			
+			(*d3dContext)->VSSetShader(solidColorVS, 0, 0);
+			(*d3dContext)->PSSetShader(solidColorPS, 0, 0);
+			(*d3dContext)->PSSetShaderResources(0, 1, &textura2);
+			(*d3dContext)->PSSetSamplers(0, 1, &texSampler2);
+		}
 
 		D3DXMATRIX worldMat;
-		D3DXMatrixTranslation(&worldMat, trans.x, trans.y - 50.0f, trans.z);
+		D3DXMatrixTranslation(&worldMat, trans.x, trans.y /*- 50.0f*/, trans.z);
+		D3DXMatrixRotationY(&worldMat, angle);
 		D3DXMatrixTranspose(&worldMat, &worldMat);
 		matrices->worldMatrix = worldMat;
 

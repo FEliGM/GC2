@@ -58,7 +58,7 @@ private:
 	ID3D11DeviceContext* d3dContext;
 
 public:
-	TerrenoRR(int ancho, int alto, ID3D11Device* D3DDevice, ID3D11DeviceContext* D3DContext)
+	TerrenoRR(int ancho, int alto, ID3D11Device* D3DDevice, ID3D11DeviceContext* D3DContext, WCHAR* Textura, WCHAR* Altura, int index)
 	{
 		//copiamos el device y el device context a la clase terreno
 		d3dContext = D3DContext;
@@ -67,7 +67,7 @@ public:
 		this->ancho = ancho;
 		this->alto = alto;
 		//aqui cargamos las texturas de alturas y el cesped
-		CargaParametros(L"Assets/Texturas/asphalt_02_diff_1k.png", L"alturas.jpg", 10.0f);
+		CargaParametros(Textura, Altura, 10.0f, index);
 	}
 
 	~TerrenoRR()
@@ -103,7 +103,7 @@ public:
 		return true;
 	}
 
-	bool CargaParametros(WCHAR* diffuseTex, WCHAR* heightTex, float tile)
+	bool CargaParametros(WCHAR* diffuseTex, WCHAR* heightTex, float tile, int index)
 	{
 		HRESULT d3dResult;
 		//carga el mapa de alturas
@@ -246,8 +246,10 @@ public:
 		estableceIndices();
 		//crea los accesos de las texturas para los shaders 
 		d3dResult = D3DX11CreateShaderResourceViewFromFile( d3dDevice, diffuseTex, 0, 0, &colorMap, 0 );
-		d3dResult = D3DX11CreateShaderResourceViewFromFile( d3dDevice, L"Assets/Texturas/large_floor_tiles_02_diff_1k.png", 0, 0, &colorMap2, 0 );
-		d3dResult = D3DX11CreateShaderResourceViewFromFile( d3dDevice, L"Assets/Texturas/blendmap.png", 0, 0, &blendMap, 0 );
+		d3dResult = D3DX11CreateShaderResourceViewFromFile(d3dDevice, L"Assets/Texturas/large_floor_tiles_02_diff_1k.png", 0, 0, &colorMap2, 0);
+		if (index == 1) {
+			d3dResult = D3DX11CreateShaderResourceViewFromFile(d3dDevice, L"Assets/Texturas/blendmap.png", 0, 0, &blendMap, 0);
+		} else{ d3dResult = D3DX11CreateShaderResourceViewFromFile(d3dDevice, L"Assets/Texturas/blendmap_agua.png", 0, 0, &blendMap, 0); }
 
 		if( FAILED( d3dResult ) )
 		{
@@ -387,8 +389,8 @@ public:
 		d3dContext->PSSetShader( solidColorPS, 0, 0 );
 		//pasa lo sbuffers al shader
 		d3dContext->PSSetShaderResources( 0, 1, &colorMap );
-		d3dContext->PSSetShaderResources( 1, 1, &colorMap2 );
-		d3dContext->PSSetShaderResources( 2, 1, &blendMap );
+		d3dContext->PSSetShaderResources(1, 1, &colorMap2);
+		d3dContext->PSSetShaderResources(2, 1, &blendMap);
 		d3dContext->PSSetSamplers( 0, 1, &colorMapSampler );
 
 		//mueve la camara
@@ -442,7 +444,7 @@ private:
 		texDesc.Filter = D3DX11_FILTER_LINEAR;
 		texDesc.MipLevels = texInfo.MipLevels;
 
-		//obtenemos la cantidad de pÏxeles en ancho y profundidad
+		//obtenemos la cantidad de pÅEeles en ancho y profundidad
 		anchoTexTerr = (int)texInfo.Width;
 		altoTexTerr = (int)texInfo.Height;
 		//generamos el espacio para contener los pixeles de altura
